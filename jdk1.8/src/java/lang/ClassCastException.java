@@ -26,13 +26,9 @@
 package java.lang;
 
 /**
- * Thrown to indicate that the code has attempted to cast an object
- * to a subclass of which it is not an instance. For example, the
- * following code generates a <code>ClassCastException</code>:
- * <blockquote><pre>
- *     Object x = new Integer(0);
- *     System.out.println((String)x);
- * </pre></blockquote>
+ * <h3>类型转化异常</h3>
+ *
+ * 再将对象转化为该对象子类类型实例时，如果转化类型错误，则抛出此异常
  *
  * @author  unascribed
  * @since   JDK1.0
