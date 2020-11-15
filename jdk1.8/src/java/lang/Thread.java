@@ -875,6 +875,8 @@ class Thread implements Runnable {
     /**
      * Interrupts this thread.
      *
+     * 注：即使是发出中断，如果锁被其他线程抢占了，目标线程也无法响应中断
+     *
      * <p> Unless the current thread is interrupting itself, which is
      * always permitted, the {@link #checkAccess() checkAccess} method
      * of this thread is invoked, which may cause a {@link

@@ -13,7 +13,5 @@ public class Main {
         System.out.println("HELLO JDK1.8");
     }
 
-    public static void methodForTest() {
-
-    }
+    public static void methodForTest() {}
 }
