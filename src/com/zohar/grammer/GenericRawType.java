@@ -47,6 +47,19 @@ public class GenericRawType {
 
     }
 
+    /**
+     * 如果希望使用参数化类型的对象作为参数，可以使用无限通配符。<br/>
+     * 使用无限通配符类型时，无法将任何元素更新到参数化类型对象中。
+     * 这样可以确保参数化类型在传递给其他未知方法时，可以保证对方无法恶意更改该类型内部的元素，
+     * 尽管对方依旧有可能产生类型转化异常，但这保证了原方法自身的安全。
+     *
+     * @param list 列表
+     * @return 列表大小
+     */
+    private static int getSize(List<?> list) {
+        return list.size();
+    }
+
     private static class Cat {
         public final String NAME = "CAT";
     }
