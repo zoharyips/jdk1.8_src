@@ -2022,20 +2022,15 @@ public final class Class<T> implements java.io.Serializable,
 
 
     /**
-     * Returns a {@code Field} object that reflects the specified declared
-     * field of the class or interface represented by this {@code Class}
-     * object. The {@code name} parameter is a {@code String} that specifies
-     * the simple name of the desired field.
+     * <h3>返回此 class 对象对应类或接口中指定数据域名的反射</h3>
      *
-     * <p> If this {@code Class} object represents an array type, then this
-     * method does not find the {@code length} field of the array type.
+     * 返回结果包含该类或接口中的任何可见性的数据域，但不包含继承而来的数据域。
+     * 如果当前 class 对应类是数组，那么此时不会返回 length 这个数据域。
      *
-     * @param name the name of the field
-     * @return  the {@code Field} object for the specified field in this
-     *          class
-     * @throws  NoSuchFieldException if a field with the specified name is
-     *          not found.
-     * @throws  NullPointerException if {@code name} is {@code null}
+     * @param name 数据域的名称
+     * @return  此类对象的类中对应数据域的反射
+     * @throws  NoSuchFieldException 若此类对象的类中没有该数据域
+     * @throws  NullPointerException 若 {@code name} 为 {@code null}
      * @throws  SecurityException
      *          If a security manager, <i>s</i>, is present and any of the
      *          following conditions is met:

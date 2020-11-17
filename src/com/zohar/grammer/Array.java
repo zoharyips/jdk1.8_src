@@ -11,11 +11,35 @@ import java.util.Arrays;
  */
 public class Array {
     public static void main(String[] args) {
-        objUndertakingAnyArr();
+
+        parentClassOfArr();
 
         objArrCastBack();
+
+        objUndertakingAnyArr();
+
     }
 
+    /**
+     * 测试数组的父类，同时尝试获取数组的 length 数据域：<br/>
+     *
+     * 无法通过反射获取数组的 length 数据域，原因应该是数组的长度在创建时予以确定且不可更改，
+     *
+     *
+     */
+    private static void parentClassOfArr() {
+        Class<String[]> strArrClass = String[].class;
+        /* 数组类对象无法反射获取 length 属性 */
+        Arrays.stream(strArrClass.getDeclaredFields()).forEach(System.out::println);
+        Class<? super String[]> superclass = strArrClass.getSuperclass();
+        /* 数组类的父类直接就是 Object */
+        System.out.println(superclass.getName());
+    }
+
+    /**
+     * 测试 Object 可以承接所有数组，无论什么维度。
+     * Object[] 也可以承接所有数组。
+     */
     private static void objUndertakingAnyArr() {
 
         /* Object 类型可以承接所有数组类型，包括多维数组，因为 Object 是所有类的父类 */
@@ -48,6 +72,13 @@ public class Array {
         System.out.println(twoDimensionalArr.getClass());
     }
 
+    /**
+     * 测试 T[] 对象转换为 Object[] 对象后能否转回 T[] 对象：<br/>
+     *
+     * 当然可以，对象的类型在创建最初确定，不管是泛型还是多态，都无法改变运行过程中对象的类型。
+     * 由于对象创建时为 T[] 类型，那么虚拟机在转换回 T[] 时不会抛出 ClassCastException，
+     * 如果抛出异常，绝对是由于某个环节造成了堆污染。
+     */
     private static void objArrCastBack() {
         String[] strArr = new String[]{"HELLO WORLD"};
         Object[] objArr = strArr;

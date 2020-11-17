@@ -32,19 +32,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectStreamException;
 
 /**
- * This is the common base class of all Java language enumeration types.
+ * <h3>Java 中枚举类型的父类</h3>
  *
- * More information about enums, including descriptions of the
- * implicitly declared methods synthesized by the compiler, can be
- * found in section 8.9 of
- * <cite>The Java&trade; Language Specification</cite>.
+ * 当需要将枚举类型作为 Set 的元素或者 Map 的 key 时，可以使用专门为此设计的高效实现：
+ * <ul>
+ *     <li>{@linkplain java.util.EnumSet EnumSet}</li>
+ *     <li>{@linkplain java.util.EnumMap EnumMap}</li>
+ * </ul>
  *
- * <p> Note that when using an enumeration type as the type of a set
- * or as the type of the keys in a map, specialized and efficient
- * {@linkplain java.util.EnumSet set} and {@linkplain
- * java.util.EnumMap map} implementations are available.
- *
- * @param <E> The enum type subclass
+ * @param <E> 子类的枚举类型
  * @author  Josh Bloch
  * @author  Neal Gafter
  * @see     Class#getEnumConstants()
@@ -52,12 +48,13 @@ import java.io.ObjectStreamException;
  * @see     java.util.EnumMap
  * @since   1.5
  */
+@SuppressWarnings("JavadocReference")
 public abstract class Enum<E extends Enum<E>>
         implements Comparable<E>, Serializable {
     /**
-     * The name of this enum constant, as declared in the enum declaration.
-     * Most programmers should use the {@link #toString} method rather than
-     * accessing this field.
+     * <h3>枚举常量的名称</h3>
+     *
+     * 即在枚举类中定义的常量名，开发人员应当使用 toString 获取常量名而非访问此变量
      */
     private final String name;
 
