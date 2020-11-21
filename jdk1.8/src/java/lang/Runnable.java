@@ -26,26 +26,14 @@
 package java.lang;
 
 /**
- * The <code>Runnable</code> interface should be implemented by any
- * class whose instances are intended to be executed by a thread. The
- * class must define a method of no arguments called <code>run</code>.
- * <p>
- * This interface is designed to provide a common protocol for objects that
- * wish to execute code while they are active. For example,
- * <code>Runnable</code> is implemented by class <code>Thread</code>.
- * Being active simply means that a thread has been started and has not
- * yet been stopped.
- * <p>
- * In addition, <code>Runnable</code> provides the means for a class to be
- * active while not subclassing <code>Thread</code>. A class that implements
- * <code>Runnable</code> can run without subclassing <code>Thread</code>
- * by instantiating a <code>Thread</code> instance and passing itself in
- * as the target.  In most cases, the <code>Runnable</code> interface should
- * be used if you are only planning to override the <code>run()</code>
- * method and no other <code>Thread</code> methods.
- * This is important because classes should not be subclassed
- * unless the programmer intends on modifying or enhancing the fundamental
- * behavior of the class.
+ * <h3>可运行接口</h3>
+ *
+ * 用于说明本接口实例是可运行的，和要求对象必须具备 run 行为。<br/><br/>
+ *
+ * 一个实现本接口的对象可以不必继承 Thread 类就可以使自身能够运行，只需要将自身作为 Thread
+ * 实例的参数就行。除非用户希望自定义或增强 Thread 类的功能，否则都应该仅继承本接口来实现多线程运行。<br/><br/>
+ *
+ * 本接口添加函数式接口注解，声明本接口是一个函数式接口，
  *
  * @author  Arthur van Hoff
  * @see     java.lang.Thread
@@ -54,16 +42,13 @@ package java.lang;
  */
 @FunctionalInterface
 public interface Runnable {
+
     /**
-     * When an object implementing interface <code>Runnable</code> is used
-     * to create a thread, starting the thread causes the object's
-     * <code>run</code> method to be called in that separately executing
-     * thread.
-     * <p>
-     * The general contract of the method <code>run</code> is that it may
-     * take any action whatsoever.
+     * <h3>对象独立执行的方法</h3>
+     *
+     * 当用户实现本接口，投入并启动一个新线程后，将在新线程执行本方法。
      *
      * @see     java.lang.Thread#run()
      */
-    public abstract void run();
+    void run();
 }

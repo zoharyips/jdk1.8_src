@@ -26,14 +26,14 @@
 package java.security;
 
 /**
- * <p> This interface represents a guard, which is an object that is used
- * to protect access to another object.
+ * <h3>守卫接口</h3>
  *
- * <p>This interface contains a single method, {@code checkGuard},
- * with a single {@code object} argument. {@code checkGuard} is
- * invoked (by the GuardedObject {@code getObject} method)
- * to determine whether or not to allow access to the object.
+ * 用于说明本接口实例是是一个守卫，要求实例必须具备 checkGuard 行为，
+ * 用于守护某一个实例对象。<br/><br/>
  *
+ * checkGuard 方法仅有一个 Object 类型参数 object，用于检查该 object
+ * 是否允许被访问，当调用 GuardedObject 的 getObject() 方法时调用本方法。
+
  * @see GuardedObject
  *
  * @author Roland Schemers
@@ -43,13 +43,14 @@ package java.security;
 public interface Guard {
 
     /**
-     * Determines whether or not to allow access to the guarded object
-     * {@code object}. Returns silently if access is allowed.
-     * Otherwise, throws a SecurityException.
+     * <h3>判断对象是否可使用</h3>
      *
-     * @param object the object being protected by the guard.
+     * 判断是否可以获取该 object 对象，如果可以则静默返回，
+     * 若不可以则抛出异常。
      *
-     * @exception SecurityException if access is denied.
+     * @param object 被守卫保护的对象
+     *
+     * @exception SecurityException 若守卫不允许访问该对象
      *
      */
     void checkGuard(Object object) throws SecurityException;

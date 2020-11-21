@@ -25,10 +25,7 @@
 
 package java.lang;
 
-import java.security.*;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.StringTokenizer;
+import java.security.BasicPermission;
 
 /**
  * This class is for runtime permissions. A RuntimePermission

@@ -27,13 +27,12 @@ package java.util.function;
 import java.util.Objects;
 
 /**
- * Represents a function that accepts one argument and produces a result.
+ * <h3>单参函数</h3>
  *
- * <p>This is a <a href="package-summary.html">functional interface</a>
- * whose functional method is {@link #apply(Object)}.
+ * 代表一个拥有一个参数和返回值的函数
  *
- * @param <T> the type of the input to the function
- * @param <R> the type of the result of the function
+ * @param <T> 参数类型
+ * @param <R> 返回值类型
  *
  * @since 1.8
  */
@@ -41,25 +40,20 @@ import java.util.Objects;
 public interface Function<T, R> {
 
     /**
-     * Applies this function to the given argument.
+     * <h3>应用本函数</h3>
      *
-     * @param t the function argument
-     * @return the function result
+     * @param t 函数参数
+     * @return 函数返回值
      */
     R apply(T t);
 
     /**
-     * Returns a composed function that first applies the {@code before}
-     * function to its input, and then applies this function to the result.
-     * If evaluation of either function throws an exception, it is relayed to
-     * the caller of the composed function.
+     * <h3>返回一个执行本函数之前会执行指定函数的函数</h3>
      *
-     * @param <V> the type of input to the {@code before} function, and to the
-     *           composed function
-     * @param before the function to apply before this function is applied
-     * @return a composed function that first applies the {@code before}
-     * function and then applies this function
-     * @throws NullPointerException if before is null
+     * @param <V> before 函数的返回值类型，也是本函数的参数类型
+     * @param before 执行本函数前执行的函数
+     * @return 一个执行本函数之前会执行 before 函数的复合函数
+     * @throws NullPointerException before 函数为空时
      *
      * @see #andThen(Function)
      */
@@ -69,17 +63,12 @@ public interface Function<T, R> {
     }
 
     /**
-     * Returns a composed function that first applies this function to
-     * its input, and then applies the {@code after} function to the result.
-     * If evaluation of either function throws an exception, it is relayed to
-     * the caller of the composed function.
+     * <h3>返回一个执行本函数之后会执行指定函数的 function</h3>
      *
-     * @param <V> the type of output of the {@code after} function, and of the
-     *           composed function
-     * @param after the function to apply after this function is applied
-     * @return a composed function that first applies this function and then
-     * applies the {@code after} function
-     * @throws NullPointerException if after is null
+     * @param <V> after 函数的返回值类型，也是本函数的返回值类型
+     * @param after 执行本函数之后执行的函数
+     * @return 一个执行完函数之后会调用 after 函数的复合函数
+     * @throws NullPointerException after 函数为空时
      *
      * @see #compose(Function)
      */
@@ -89,10 +78,10 @@ public interface Function<T, R> {
     }
 
     /**
-     * Returns a function that always returns its input argument.
+     * <h3>创造一个永远返回输入参数的函数</h3>
      *
-     * @param <T> the type of the input and output objects to the function
-     * @return a function that always returns its input argument
+     * @param <T> 返回 function 的入参和返回类型
+     * @return 一个永远返回入参的函数
      */
     static <T> Function<T, T> identity() {
         return t -> t;

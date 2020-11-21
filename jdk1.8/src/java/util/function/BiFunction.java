@@ -27,15 +27,13 @@ package java.util.function;
 import java.util.Objects;
 
 /**
- * Represents a function that accepts two arguments and produces a result.
- * This is the two-arity specialization of {@link Function}.
+ * <h3>双参函数</h3>
  *
- * <p>This is a <a href="package-summary.html">functional interface</a>
- * whose functional method is {@link #apply(Object, Object)}.
+ * 表示接受两个参数并生成结果的函数。这就是 {@link Function} 的二元特化。
  *
- * @param <T> the type of the first argument to the function
- * @param <U> the type of the second argument to the function
- * @param <R> the type of the result of the function
+ * @param <T> 第一个参数的类型
+ * @param <U> 第二个参数的类型
+ * @param <R> 返回结果类型
  *
  * @see Function
  * @since 1.8
@@ -44,26 +42,21 @@ import java.util.Objects;
 public interface BiFunction<T, U, R> {
 
     /**
-     * Applies this function to the given arguments.
+     * <h3>应用本函数</h3>
      *
-     * @param t the first function argument
-     * @param u the second function argument
-     * @return the function result
+     * @param t 第一个参数
+     * @param u 第二个参数
+     * @return 返回值
      */
     R apply(T t, U u);
 
     /**
-     * Returns a composed function that first applies this function to
-     * its input, and then applies the {@code after} function to the result.
-     * If evaluation of either function throws an exception, it is relayed to
-     * the caller of the composed function.
+     * <h3>执行后调用指定函数</h3>
      *
-     * @param <V> the type of output of the {@code after} function, and of the
-     *           composed function
-     * @param after the function to apply after this function is applied
-     * @return a composed function that first applies this function and then
-     * applies the {@code after} function
-     * @throws NullPointerException if after is null
+     * @param <V> after 函数的返回值类型，也是本双参函数的返回值类型
+     * @param after 应用本函数之后要执行的 after 函数
+     * @return 一个执行完本函数之后会调用 after 函数的复合函数
+     * @throws NullPointerException 当 after 函数为空时
      */
     default <V> BiFunction<T, U, V> andThen(Function<? super R, ? extends V> after) {
         Objects.requireNonNull(after);

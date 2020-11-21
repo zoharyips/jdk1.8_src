@@ -36,9 +36,9 @@
 package java.util.concurrent;
 
 /**
- * A task that returns a result and may throw an exception.
- * Implementors define a single method with no arguments called
- * {@code call}.
+ * <h3>可调用接口</h3>
+ *
+ *
  *
  * <p>The {@code Callable} interface is similar to {@link
  * java.lang.Runnable}, in that both are designed for classes whose

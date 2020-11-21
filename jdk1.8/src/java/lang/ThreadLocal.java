@@ -245,10 +245,11 @@ public class ThreadLocal<T> {
     }
 
     /**
-     * Factory method to create map of inherited thread locals.
-     * Designed to be called only from Thread constructor.
+     * <h3>创建可继承的 threadLocal 列表</h3>
      *
-     * @param  parentMap the map associated with parent thread
+     * 静态工厂方法，仅为线程构造器设计使用。
+     *
+     * @param  parentMap 父线程的 inherited thread-local 列表
      * @return a map containing the parent's inheritable bindings
      */
     static ThreadLocalMap createInheritedMap(ThreadLocalMap parentMap) {
@@ -286,24 +287,21 @@ public class ThreadLocal<T> {
     }
 
     /**
-     * ThreadLocalMap is a customized hash map suitable only for
-     * maintaining thread local values. No operations are exported
-     * outside of the ThreadLocal class. The class is package private to
-     * allow declaration of fields in class Thread.  To help deal with
-     * very large and long-lived usages, the hash table entries use
-     * WeakReferences for keys. However, since reference queues are not
-     * used, stale entries are guaranteed to be removed only when
-     * the table starts running out of space.
+     * <h3>ThreadLocal 变量表</h3>
+     *
+     * ThreadLocalMap 是一个定制的哈希映射，只用于维护 ThreadLocal 变量。
+     * 在 ThreadLocal 类之外不导出任何操作。该类是包私有的，以允许在类线程中声明字段。
+     * 为了提供更大和更持久地使用，使用弱引用作为哈希表的键。然而由于使用了弱引用，
+     * 只有在表空间不足时才会删除失效的键值对。
      */
     static class ThreadLocalMap {
 
         /**
-         * The entries in this hash map extend WeakReference, using
-         * its main ref field as the key (which is always a
-         * ThreadLocal object).  Note that null keys (i.e. entry.get()
-         * == null) mean that the key is no longer referenced, so the
-         * entry can be expunged from table.  Such entries are referred to
-         * as "stale entries" in the code that follows.
+         * <h3>键值对 Entry</h3>
+         *
+         * 此映射表中的键值对是一个继承了弱引用的 Entry 对象，key 为 threadLocal 的弱引用，
+         * 值为 threadLocal 所存储的对象。如果 entry 里的 key 为 null，则表示该弱引用已失效，
+         * 此失效的 entry 可以从映射表中剔除。
          */
         static class Entry extends WeakReference<ThreadLocal<?>> {
             /** The value associated with this ThreadLocal. */
@@ -315,29 +313,22 @@ public class ThreadLocal<T> {
             }
         }
 
-        /**
-         * The initial capacity -- MUST be a power of two.
-         */
+        /** 初始容量，必须是 2 的幂方 */
         private static final int INITIAL_CAPACITY = 16;
 
-        /**
-         * The table, resized as necessary.
-         * table.length MUST always be a power of two.
-         */
+        /** 映射表实体，在必要时会调整大小，其大小必须为 2 的幂方 */
         private Entry[] table;
 
-        /**
-         * The number of entries in the table.
-         */
+        /** 当前元素数量 */
         private int size = 0;
 
-        /**
-         * The next size value at which to resize.
-         */
+        /** 负载因子，触发扩容的阈值，默认为 0 */
         private int threshold; // Default to 0
 
         /**
-         * Set the resize threshold to maintain at worst a 2/3 load factor.
+         * <h3>设置负载因子</h3>
+         *
+         * 为传入参数值的 2/3
          */
         private void setThreshold(int len) {
             threshold = len * 2 / 3;
