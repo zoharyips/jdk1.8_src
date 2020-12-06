@@ -53,19 +53,17 @@ import java.util.function.Consumer;
  */
 public interface Iterator<E> {
     /**
-     * Returns {@code true} if the iteration has more elements.
-     * (In other words, returns {@code true} if {@link #next} would
-     * return an element rather than throwing an exception.)
+     * <h3>判断该迭代过程中是否有剩余元素</h3>
      *
-     * @return {@code true} if the iteration has more elements
+     * @return 若此迭代过程仍有剩余元素，返回 true
      */
     boolean hasNext();
 
     /**
-     * Returns the next element in the iteration.
+     * <h3>返回此迭代过程中的下一元素</h3>
      *
-     * @return the next element in the iteration
-     * @throws NoSuchElementException if the iteration has no more elements
+     * @return 此迭代过程的下一元素
+     * @throws NoSuchElementException 若次迭代过程没有其他元素
      */
     E next();
 

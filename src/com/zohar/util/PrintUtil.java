@@ -21,6 +21,8 @@ public class PrintUtil {
      */
     public static void printMethodName() {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+        System.out.println(Arrays.toString(stackTrace));
+        System.out.println(stackTrace.length);
         if (stackTrace.length > 3) {
             String isRunning = " is Running: ";
             //noinspection StringBufferMayBeStringBuilder
@@ -32,6 +34,20 @@ public class PrintUtil {
             System.out.println(dividerStr);
             System.out.println(stackTrace[2] + isRunning);
             System.out.println(dividerStr);
+        }
+    }
+
+    public static void main(String[] args) {
+        (new Test()).testOuter();
+    }
+
+    private static class Test{
+        private void testInner() {
+            printMethodName();
+        }
+
+        public void testOuter() {
+            testInner();
         }
     }
 }

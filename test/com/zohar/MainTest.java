@@ -13,37 +13,37 @@ import java.util.Date;
  */
 class MainTest {
 
-    private static final MainTest INSTANCE = new MainTest();
-
-    @Test
-    void methodForTest() {
-        System.out.println("HELLO Method for test");
-    }
-
     public static void main(String[] args) {
 
-        new MyThread().start();
-        new MyThread().start();
-        new MyThread().start();
+        MyInterface.test();
+
+        System.out.println(MYClass.test);
 
     }
 
-    private static class MyThread extends Thread {
-        @Override
-        public void run() {
-            for (int i = 0; i < 10; i++) {
-                INSTANCE.work(this.getName(), i);
-            }
+    interface MyInterface {
+
+        String test = "GOOD";
+        String NAME = "HELLOO";
+        static void test() {
+            System.out.println("Static Method In Interface");
         }
+        default void test2() {
+            System.out.println("GOOD");
+        }
+
     }
 
-    private void work(String threadName, int times) {
-        System.out.println(threadName + " start working: " + System.currentTimeMillis() + " => " + times);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(threadName + " work finished: " + System.currentTimeMillis() + " => " + times);
+    static abstract class AbsClassOne {
+
+        abstract void test();
+    }
+
+    static abstract class AbsClassTwo extends AbsClassOne {
+
+    }
+
+    static class MYClass implements MyInterface {
+
     }
 }

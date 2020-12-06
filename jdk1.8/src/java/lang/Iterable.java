@@ -31,6 +31,9 @@ import java.util.Spliterators;
 import java.util.function.Consumer;
 
 /**
+ * <h3>可迭代接口</h3>
+ *
+ * 用于说明对象具有迭代功能，
  * Implementing this interface allows an object to be the target of
  * the "for-each loop" statement. See
  * <strong>

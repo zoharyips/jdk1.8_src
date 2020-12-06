@@ -2,6 +2,8 @@ package com.zohar.java.lang;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.ref.PhantomReference;
+import java.lang.ref.ReferenceQueue;
 import java.util.Arrays;
 
 /**
@@ -148,5 +150,34 @@ public class ObjectTest {
         public String toString() {
             return super.toString();
         }
+    }
+
+    /**
+     * 测试 Finalize 方法
+     *
+     * 虚引用可以在对象被回收时发放一个通知到队列中去，根据该通知判断对象是否被回收。
+     */
+    @Test
+    @SuppressWarnings({"UnusedAssignment", "unused"})
+    public void finalizeTest() throws InterruptedException {
+        Object obj = new Object() {
+            @Override
+            protected void finalize() {
+                synchronized (Object.class) {
+                    Object.class.notify();
+                }
+            }
+        };
+        ReferenceQueue<Object> queue = new ReferenceQueue<>();
+        PhantomReference<Object> phantomRef = new PhantomReference<>(obj, queue);
+        obj = null;
+        System.gc();
+        System.out.println("After first time gc: " + queue.poll()); // 必定为 null，因为首次 gc 将 obj 加入 F-Queue，不会立刻回收
+        synchronized (Object.class) {
+            Object.class.wait();
+        }
+        System.out.println("After finalized: " + queue.poll()); // 必定为 null，即使对象执行完 finalize 方法，也需要再次 gc 才会被回收
+        System.gc();
+        System.out.println("After finalized and gc: " + queue.poll()); // phantomRef 的地址，标志着 phantomRef 所指向的对象已释放
     }
 }
